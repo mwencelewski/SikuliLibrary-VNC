@@ -16,6 +16,7 @@ import com.github.rainmanwy.robotframework.sikulilib.utils.CaptureFolder;
 
 import org.sikuli.basics.Settings;
 import org.sikuli.script.*;
+import org.sikuli.vnc.VNCScreen;
 
 /**
  * Created by Wang Yang on 2015/8/19.
@@ -26,7 +27,8 @@ public class ScreenKeywords {
 
     private static double DEFAULT_TIMEOUT = 3.0;
     private static Screen screen = new Screen();
-    private static Region region = new Region(screen);
+    private static VNCScreen vnc = VNCScreen.start("127.0.0.1",50000,10,1000);
+    private static Region region = new Region(vnc);
     private double timeout;
     private Boolean isCaptureMatchedImage = true;
     private Map<String, Match> highlightMap = new HashMap<String, Match>();
@@ -35,10 +37,12 @@ public class ScreenKeywords {
         timeout = DEFAULT_TIMEOUT;
     }
 
-    public static Screen getScreen() {
+    /*public static Screen getScreen() {
         return screen;
+    }*/
+    public static VNCScreen getScreen(){
+        return vnc;
     }
-
     public static Region getRegion() {
         return region;
     }
@@ -161,7 +165,8 @@ public class ScreenKeywords {
     @ArgumentNames({"text"})
     public int[] clickText(String text) throws Exception{
         try {
-            Match match = screen.findText(text);
+           // Match match = screen.findText(text);
+            Match match = vnc.findText(text);
             match.click();
             return regionFromMatch(match);
         }
@@ -447,7 +452,8 @@ public class ScreenKeywords {
     }
 
     private String capture() {
-        ScreenImage image = screen.capture(region);
+        //ScreenImage image = screen.capture(region);
+        ScreenImage image = vnc.capture(region);
         String imagePath = image.save(CaptureFolder.getInstance().getCaptureFolder());
         System.out.println("*DEBUG* Saved path: "+imagePath);
         File file = new File(imagePath);
@@ -458,7 +464,8 @@ public class ScreenKeywords {
 
     private String capture(Region region) {
         if (isCaptureMatchedImage) {
-            ScreenImage image = screen.capture(region);
+            //ScreenImage image = screen.capture(region);
+            ScreenImage image = vnc.capture(region);
             String imagePath = image.save(CaptureFolder.getInstance().getCaptureFolder());
             System.out.println("*DEBUG* Saved path: "+imagePath);
             File file = new File(imagePath);

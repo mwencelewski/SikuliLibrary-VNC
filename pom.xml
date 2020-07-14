@@ -9,6 +9,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
     </properties>
 
     <repositories>
@@ -27,8 +28,8 @@
 <!--                <updatePolicy>always</updatePolicy>-->
 <!--            </snapshots>-->
 <!--        </repository>-->
-<!--        <repository>-->
-<!--            &lt;!&ndash; OSSRH: com.sikulix &ndash;&gt;-->
+<!--        <repository>
+            &lt;!&ndash; OSSRH: com.sikulix &ndash;&gt;-->
 <!--            <name>jxgrabkey</name>-->
 <!--            <id>jxgrabkey</id>-->
 <!--            <url>https://labs.consol.de/maven/repository/</url>-->
@@ -46,6 +47,14 @@
 
 
     <dependencies>
+
+        <dependency>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.1</version>
+            <type>maven-plugin</type>
+        </dependency>
+
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -57,11 +66,11 @@
             <artifactId>sikulixapi</artifactId>
             <version>2.0.4</version>
         </dependency>
-        <!--dependency>
+        <dependency>
             <groupId>org.robotframework</groupId>
             <artifactId>javalib-core</artifactId>
             <version>1.2.1</version>
-        </dependency-->
+        </dependency>
         <dependency>
             <groupId>com.github.ombre42</groupId>
             <artifactId>jrobotremoteserver</artifactId>
@@ -74,16 +83,24 @@
         <sourceDirectory>src/java</sourceDirectory>
         <plugins>
 
-            <plugin>
+         <!--   <plugin>
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
+            </plugin> -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <source>7</source>
+                    <target>7</target>
+                </configuration>
             </plugin>
-
-            <!--plugin>
+            <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>2.4</version>
@@ -97,10 +114,10 @@
                     </archive>
                     <finalName>SikuliLibrary</finalName>
                 </configuration>
-            </plugin-->
+            </plugin>
 
 
-            <!--plugin>
+           <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <version>2.5.1</version>
@@ -119,15 +136,15 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin-->
+            </plugin> -->
 
-            <plugin>
+           <!-- <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
                 <version>2.6</version>
-                <configuration>
-                    <!--descriptor>package.xml</descriptor-->
-                    <finalName>SikuliLibrary</finalName>
+                <configuration>-->
+                    <!--<descriptor>package.xml</descriptor-->
+                    <!--<finalName>SikuliLibrary</finalName>
                     <appendAssemblyId>false</appendAssemblyId>
                     <descriptorRefs>
                         <descriptorRef>jar-with-dependencies</descriptorRef>
@@ -160,9 +177,9 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin> -->
 
-            <plugin>
+            <!--plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-antrun-plugin</artifactId>
                 <version>1.6</version>
@@ -177,21 +194,21 @@
                                 <echo message="generate keywords.py"/>
                                 <exec dir="target/src" executable="python" failonerror="true">
                                     <arg line="-m SikuliLibrary.__init__"/>
-                                </exec>
+                                </exec-->
                                 <!--<unzip src="output/inner.zip" dest="output" />-->
                                 <!--<unzip dest="output">-->
                                 <!--<fileset dir="archives">-->
                                 <!--<include name="prefix*.zip" />-->
                                 <!--</fileset>-->
                                 <!--</unzip>-->
-                            </tasks>
+                          <!--  </tasks>
                         </configuration>
                         <goals>
                             <goal>run</goal>
                         </goals>
                     </execution>
                 </executions>
-            </plugin>
+            </plugin-->
 
         </plugins>
     </build>
